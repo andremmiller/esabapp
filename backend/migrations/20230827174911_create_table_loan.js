@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-    return knex.schema.createTable('loan', table => {
+    return knex.schema.createTable('loans', table => {
         table.increments('id')
         table.date('endAt').notNullable()
 
@@ -20,5 +20,5 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-    return knex.schema.dropTable('loan')
+    return knex.schema.dropTable('loans')
 };
