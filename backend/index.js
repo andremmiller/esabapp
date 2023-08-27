@@ -5,10 +5,11 @@ const db = require('./config/db')
 app.db = db
 
 app.listen(3000, () => {
-    console.log('Backend executando...')
+    console.log('Backend aguardando requests na porta 3000...')
 })
 
 consign()
+    .include('./config/passport.js')
     .then('./config/middlewares.js')
     .then('./api/validation.js')
     .then('./api')

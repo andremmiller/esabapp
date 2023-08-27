@@ -1,5 +1,10 @@
 module.exports = app => {
+    app.post('/signup', app.api.user.save)
+    app.post('/signin', app.api.auth.signin)
+    app.post('/validateToken', app.api.auth.validateToken)
+
     app.route('/users')
+        .all(app.config.passport.authenticate())
         .post(app.api.user.save) // consign se encarrega de carregar os imports para dentro de app
         .get(app.api.user.get)
 
@@ -10,6 +15,7 @@ module.exports = app => {
         .delete(app.api.user.remove)
     
     app.route('/games')
+        //.all(app.config.passport.authenticate())
         .post(app.api.game.save) // consign se encarrega de carregar os imports para dentro de app
         .get(app.api.game.get)
 
@@ -20,6 +26,7 @@ module.exports = app => {
         .delete(app.api.game.remove)
     
     app.route('/loans')
+        //.all(app.config.passport.authenticate())
         .post(app.api.loan.save) // consign se encarrega de carregar os imports para dentro de app
         .get(app.api.loan.get)
 
@@ -30,6 +37,7 @@ module.exports = app => {
         .delete(app.api.loan.remove)
     
     app.route('/fees')
+        //.all(app.config.passport.authenticate())
         .post(app.api.fee.save) // consign se encarrega de carregar os imports para dentro de app
         .get(app.api.fee.get)
 

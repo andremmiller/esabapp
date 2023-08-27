@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  esabapp_backend:
+    image: andremmiller/esabapp_backend:1.0
+    ports:
+      - "3000:3000"
+    networks:
+      - database_app
+      - app
+networks:
+  database_app:
+    external: true
+  app:
+    driver: bridge

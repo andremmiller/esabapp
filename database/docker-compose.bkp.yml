@@ -13,16 +13,11 @@ services:
       - MYSQL_ROOT_PASSWORD=senha
       - MYSQL_DATABASE=esabapp
     command: --init-file /data/application/init.sql
-    networks:
-      - app
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
+    links:
+      - mysql
     ports:
-      - 8088:80
+      - 80:80
     environment:
       - PMA_ARBITRARY=1
-    networks:
-      - app
-networks:
-  app:
-    driver: bridge
