@@ -8,19 +8,21 @@
         <Tree :data="treeData" :options="treeOptions"
             :filter="treeFilter" ref="tree" />
     </aside>-->
-    <aside class="menu" >
+    <aside class="menu" v-show="isMenuVisible">
         
     </aside>
 </template>
 
 <script>
-/* import { mapState } from 'vuex'
+import { mapState } from 'vuex'
+/*
 import Tree from 'liquor-tree'
 import { baseApiUrl } from '@/global'
 import axios from 'axios' */
 
 export default {
     name: 'Menu',
+    computed: mapState(['isMenuVisible'])
     /* components: { Tree },
     computed: mapState(['isMenuVisible']),
     data: function() {

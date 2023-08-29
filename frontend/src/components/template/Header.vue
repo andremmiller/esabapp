@@ -1,20 +1,21 @@
 <template>
     <header class="header">
-        <a class="toggle">
-            <i class="fa fa-lg fa-angle-left"></i>
+        <a class="toggle" @click="toggleMenu">
+            <i class="fa fa-lg" :class="icon"></i>
         </a>
-        <h1 class="title">
-            {{ title }}
+        <h1 class="title">   
+            <router-link to="/">{{ title }}</router-link>
         </h1>
+        <UserDropdown v-if="!hideUserDropdown" />
     </header>
 </template>
 
 <script>
-//import UserDropdown from './UserDropdown'
+import UserDropdown from './UserDropdown'
 
 export default {
     name: 'Header',
-    //components: { UserDropdown },
+    components: { UserDropdown },
     props: {
         title: String,
         hideToggle: false,

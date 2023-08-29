@@ -1,6 +1,6 @@
 <template>
-	<div id="app">
-		<Header title="Cod3r - Base de Conhecimento 2" 
+	<div id="app" :class="{'hide-menu': !isMenuVisible}">
+		<Header title="Plataforma Empréstimo de Jogos" 
 			:hideToggle="false" />
 		<!--<Menu v-if="user" />
 		<Loading v-if="validatingToken" />
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Header from "@/components/template/Header"
 import Menu from "@/components/template/Menu"
 import Content from "@/components/template/Content"
@@ -21,7 +22,8 @@ import Footer from "@/components/template/Footer"
 
 export default {
 	name: "App",
-	components: { Header, Menu, Content, Footer  }
+	components: { Header, Menu, Content, Footer  },
+	computed: mapState(['isMenuVisible'])
 }
 </script>
 
