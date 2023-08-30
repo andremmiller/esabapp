@@ -12,6 +12,11 @@ Erro ao rodar npm run serve: opensslErrorStack: [ 'error:03000086:digital envelo
 Solução: Rodar comando no linux ==> export NODE_OPTIONS=--openssl-legacy-provider
 
 ## Andamento
+
+** Frontend: componente Game criado com um formulario base
+** Backend: rota criada para upload de imagem de jogos
+** Alterar endereço do banco de dados no backend
+
 01. Frontend
 -> Cadastros/edições
 ** Novo usuário

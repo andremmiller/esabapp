@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import Home from '@/components/home/Home'
 import AdminPages from '@/components/admin/AdminPages'
+import Game from '@/components/game/Game'
 // import ArticlesByCategory from '@/components/article/ArticlesByCategory'
 // import ArticleById from '@/components/article/ArticleById'
 // import Auth from '@/components/auth/Auth'
@@ -19,6 +20,10 @@ const routes = [{
     name: 'adminPages',
     path: '/admin',
     component: AdminPages
+}, {
+    name: 'game',
+    path: '/game',
+    component: Game
 }
 // , {
 //     name: 'articlesByCategory',
