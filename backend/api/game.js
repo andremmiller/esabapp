@@ -11,7 +11,7 @@ module.exports = app => {
         try {
             existsOrError(game.name, 'Nome não informado')
             existsOrError(game.desc, 'Descrição não informada')
-            existsOrError(game.userId, 'Usuário não informado')
+            existsOrError(game.userId, 'Usuário não informado') 
         } catch(msg) {
             return res.status(400).send(msg)
         }
@@ -59,5 +59,10 @@ module.exports = app => {
         }
     }
 
-    return { save, get, getById, remove }
+    const uploadImg = async (req, res) => {
+        return res.status(400).send("uploadImggggg")
+
+    }
+
+    return { save, get, getById, remove, uploadImg }
 }
