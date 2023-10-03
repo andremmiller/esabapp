@@ -8,8 +8,11 @@
             <i class="fa fa-angle-down"></i>
         </div>
         <div class="user-dropdown-content">
-            <router-link to="/admin">
-              <i class="fa fa-cogs"></i> Administração 
+            <router-link to="/game">
+              <i class="fa fa-gamepad"></i> Meus jogos 
+            </router-link>
+            <router-link to="/loans">
+              <i class="fa fa-handshake-o"></i> Meus empréstimos 
             </router-link>
             <a href @click.prevent="logout"><i class="fa fa-sign-out"></i> Sair</a>
         </div>

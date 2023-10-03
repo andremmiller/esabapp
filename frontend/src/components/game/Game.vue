@@ -6,15 +6,16 @@
             img-src="https://picsum.photos/600/300/?image=25"
             img-top
             tag="article"
-            style="max-width: 20rem;"
+            style="max-width: 50rem;"
             class="mb-2"
         >
             <b-card-text>
                 {{ game ? game.desc : null }}
+                <div class="info">
+                  <div><span>Proprietário: </span>{{ game ? game.userName: '' }}</div>
+                  <div><span>Contato: </span> {{ game ? game.userMail + ' | ' + game.userPhone : '' }}</div>
+                </div>
             </b-card-text>
-
-            <b-button href="#" variant="primary">Solicitar empréstimo</b-button>
-
             <LoanForm :game="game" />
         </b-card>
 
@@ -35,11 +36,11 @@ export default {
   computed: mapState(['user']),
   data() {
     return {
-      game: null
+      game: null,
+      showLoanForm: false
     };
   }, 
   methods: {
-    
   },
   mounted() {
     if(this.$route.params.id) {
@@ -49,3 +50,12 @@ export default {
   }
 };
 </script>
+<style scoped>
+.info {
+  margin: 20px 0px 20px 0px;
+}
+
+.info span {
+  font-weight: bold;
+}
+</style>

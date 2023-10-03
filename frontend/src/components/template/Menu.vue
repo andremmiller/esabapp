@@ -9,6 +9,26 @@
             :filter="treeFilter" ref="tree" />
     </aside>-->
     <aside class="menu" v-show="isMenuVisible">
+        <ul>
+            <router-link :to="{ name: 'home' }">
+                <li class="menu-item">
+                    <i class="fa fa-home" aria-hidden="true"></i> 
+                    Início
+                </li>
+            </router-link>
+            <router-link :to="{ name: 'gameList' }">
+                <li class="menu-item">
+                    <i class="fa fa-gamepad" aria-hidden="true"></i>
+                    Jogos disponíveis
+                </li>
+            </router-link>
+            <router-link :to="{ name: 'loanList' }">
+                <li class="menu-item">
+                    <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                    Empréstimos
+                </li>
+            </router-link>
+        </ul>
         
     </aside>
 </template>
@@ -110,5 +130,20 @@ export default {
         color: #CCC;
         font-size: 1.3rem;
         margin-left: 20px;
+    }
+
+    .menu ul {
+        padding: 0;
+        padding-left: 5px;
+    }
+    .menu-item {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        color: #CCC
+    }
+
+    .menu-item i {
+        margin-right: 7px;
     }
 </style>

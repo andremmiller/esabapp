@@ -9,7 +9,7 @@
             <label>Data de termínio: </label>
             <input type="date" class="form-control" v-model="loan.endAt">
         </div>
-        <b-button type="submit" variant="primary">Solicitar</b-button>
+        <b-button type="submit" variant="primary">Solicitar empréstimo</b-button>
     </b-form>
   </div>
 </template>

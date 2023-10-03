@@ -39,11 +39,23 @@ module.exports = app => {
 
     const getById = (req, res) => {
         app.db('games')
-            .select('id', 'name', 'desc', 'userId')
-            .where({ id: req.params.id })
+            .select(
+                'games.id', 
+                'games.name', 
+                'games.desc', 
+                'games.userId',
+                'users.name as userName',
+                'users.email as userMail',
+                'users.phone as userPhone'
+            )
+            .join('users', 'games.userId', 'users.id')
+            .where({ 'games.id': req.params.id })
             .first()
             .then(game => res.json(game))
-            .catch(err => res.status(500).send(err))
+            .catch(err => {
+                console.error(err)
+                res.status(500).send(err)
+            })
     }
 
     const remove = async (req, res) => {

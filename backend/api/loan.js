@@ -16,6 +16,8 @@ module.exports = app => {
         }
 
         if(loan.id) {
+            delete loan.gameName
+            delete loan.userName
             app.db('loans')
                 .update(loan)
                 .where({ id: loan.id })
@@ -31,9 +33,23 @@ module.exports = app => {
 
     const get = (req, res) => {
         app.db('loans')
-            .select('id', 'gameId', 'beginAt', 'endAt', 'userId', 'status')
+            .select(
+                'loans.id', 
+                'loans.gameId', 
+                'loans.beginAt', 
+                'loans.endAt', 
+                'loans.userId', 
+                'loans.status',
+                'users.name as userName',
+                'games.name as gameName'
+            )
+            .join('users', 'loans.userId', 'users.id')
+            .join('games', 'loans.gameId', 'games.id')
             .then(loans => res.json(loans))
-            .catch(err => res.status(500).send(err))
+            .catch(err => {
+                console.error(err)
+                res.status(500).send(err)
+            })
     }
 
     const getById = (req, res) => {

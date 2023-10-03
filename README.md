@@ -21,8 +21,6 @@ Solução: Rodar comando no linux ==> export NODE_OPTIONS=--openssl-legacy-provi
 ** Frontend: cadastro de usuario e autenticacao criados
 ** Backend: rota criada para upload de imagem de jogos
 
-PS: ajustar backend no get de loans para retornar status e data de início
-
 01. Frontend
 -> Cadastros/edições
 ** Novo usuário OK
@@ -30,7 +28,7 @@ PS: ajustar backend no get de loans para retornar status e data de início
 ** Novo empréstimo OK
 ** Lista de empréstimos OK
 
-**** Status de empréstimos:
+**** Status de empréstimos: OK
         Solicitado (Solicitar com prazo)
         Vigente (Aceitar emprestimo)
         Finalizado (Confirmar devolução)
@@ -52,6 +50,8 @@ Busca de todos os jogos na plataforma
 ** Contato do dono
 ** Disponível ou não
 
+
+OK
 -> Dentro de empréstimo
 ** Dados do jogo
 ** Dados do empréstimo
