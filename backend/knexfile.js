@@ -6,7 +6,7 @@
 module.exports = {
   client: 'mysql2',
   connection: {
-    host: '10.4.20.37',
+    host: 'mysql',
     port: 3306,
     database: 'esabapp',
     user:     'root',
