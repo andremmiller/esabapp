@@ -4,9 +4,10 @@ import VueRouter from 'vue-router'
 import Home from '@/components/home/Home'
 import AdminPages from '@/components/admin/AdminPages'
 import GameForm from '@/components/game/GameForm'
-// import ArticlesByCategory from '@/components/article/ArticlesByCategory'
-// import ArticleById from '@/components/article/ArticleById'
+import GameList from '@/components/game/GameList'
+import Game from '@/components/game/Game'
 import Auth from '@/components/auth/Auth'
+import LoanList from '@/components/loan/LoanList'
 
 // import { userKey } from '@/global'
 
@@ -22,9 +23,25 @@ const routes = [{
     component: AdminPages,
     meta: { requiresAdmin: true }
 }, {
-    name: 'gameadd',
+    name: 'gameAdd',
     path: '/game/add',
     component: GameForm
+}, {
+    name: 'gameUpdate',
+    path: '/game/update/:id',
+    component: GameForm
+}, {
+    name: 'gameList',
+    path: '/game/',
+    component: GameList
+}, {
+    name: 'game',
+    path: '/game/:id',
+    component: Game
+}, {
+    name: 'loanList',
+    path: '/loans/',
+    component: LoanList
 }
 // , {
 //     name: 'articlesByCategory',

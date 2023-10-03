@@ -1,91 +1,51 @@
 <template>
   <div>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="input-1"
-        description="We'll never share your email with anyone else."
-      >
-        <b-form-input
-          id="input-1"
-          v-model="form.email"
-          type="email"
-          placeholder="Enter email"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.name"
-          placeholder="Enter name"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-        <b-form-select
-          id="input-3"
-          v-model="form.food"
-          :options="foods"
-          required
-        ></b-form-select>
-      </b-form-group>
-
-      <b-form-group id="input-group-4" v-slot="{ ariaDescribedby }">
-        <b-form-checkbox-group
-          v-model="form.checked"
-          id="checkboxes-4"
-          :aria-describedby="ariaDescribedby"
+    <h1>Detalhe do jogo</h1>
+        <b-card
+            :title="game ? game.name : null"
+            img-src="https://picsum.photos/600/300/?image=25"
+            img-top
+            tag="article"
+            style="max-width: 20rem;"
+            class="mb-2"
         >
-          <b-form-checkbox value="me">Check me out</b-form-checkbox>
-          <b-form-checkbox value="that">Check that out</b-form-checkbox>
-        </b-form-checkbox-group>
-      </b-form-group>
+            <b-card-text>
+                {{ game ? game.desc : null }}
+            </b-card-text>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
-    <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card>
+            <b-button href="#" variant="primary">Solicitar empréstimo</b-button>
+
+            <LoanForm :game="game" />
+        </b-card>
+
+        
   </div>
+  
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        form: {
-          email: '',
-          name: '',
-          food: null,
-          checked: []
-        },
-        foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-        show: true
-      }
-    },
-    methods: {
-      onSubmit(event) {
-        event.preventDefault()
-        alert(JSON.stringify(this.form))
-      },
-      onReset(event) {
-        event.preventDefault()
-        // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        this.form.food = null
-        this.form.checked = []
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
-      }
-    }
+import { baseApiUrl } from '@/global'
+import axios from 'axios'
+import { mapState } from 'vuex'
+import LoanForm from "../loan/LoanForm.vue"
+
+export default {
+  name: 'Game',
+  components: { LoanForm },
+  computed: mapState(['user']),
+  data() {
+    return {
+      game: null
+    };
+  }, 
+  methods: {
+    
+  },
+  mounted() {
+    if(this.$route.params.id) {
+      const url = `${baseApiUrl}/games/${this.$route.params.id}`
+      axios.get(url).then(res => this.game = res.data)
+    }       
   }
+};
 </script>

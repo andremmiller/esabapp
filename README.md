@@ -8,6 +8,7 @@ Projeto para disciplina de graduação
 
 ## Setup provisorio DEV
 Como o frontend ainda não está em imagem docker, deve-se configurar o arquivo global.js com a URL da API conforme o ambiente em que está sendo testado
+No package.json, ajustar npm run serve com export/set, para os SOs linux/windows, respectivamente
 
 ## Possíveis erros
 01. Frontend
@@ -20,11 +21,14 @@ Solução: Rodar comando no linux ==> export NODE_OPTIONS=--openssl-legacy-provi
 ** Frontend: cadastro de usuario e autenticacao criados
 ** Backend: rota criada para upload de imagem de jogos
 
+PS: ajustar backend no get de loans para retornar status e data de início
+
 01. Frontend
 -> Cadastros/edições
 ** Novo usuário OK
-** Novo jogo
-** Novo empréstimo 
+** Novo jogo OK
+** Novo empréstimo OK
+** Lista de empréstimos OK
 
 **** Status de empréstimos:
         Solicitado (Solicitar com prazo)

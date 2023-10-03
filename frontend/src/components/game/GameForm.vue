@@ -2,16 +2,16 @@
   <div>
     <b-form @submit.prevent="submitForm">
       <b-form-group  label="Name:">
-        <b-form-input  v-model="formData.name" type="text" placeholder="Enter name" required />
+        <b-form-input  v-model="game.name" type="text" placeholder="Enter name" required />
       </b-form-group>
 
       <b-form-group  label="Description:">
-        <b-form-input  v-model="formData.desc" type="text" placeholder="Enter description" required />
+        <b-form-input  v-model="game.desc" type="text" placeholder="Enter description" required />
       </b-form-group>
 
-      <b-form-group label="Image:">
+      <!-- <b-form-group label="Image:">
         <input type="file" id="image" @change="handleImageChange" />
-      </b-form-group>
+      </b-form-group> -->
 
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
@@ -19,43 +19,51 @@
 </template>
 
 <script>
-  export default {
+import { baseApiUrl, showError } from '@/global'
+import axios from 'axios'
+import { mapState } from 'vuex'
+
+export default {
+  name: 'GameForm',
+  computed: mapState(['user']),
   data() {
     return {
-      formData: {
+      game: {
         name: '',
-        desc: '',
-        image: null,
+        desc: ''
+        //image: null,
       },
     };
-  },
+  }, 
   methods: {
-    handleImageChange(event) {
-      this.formData.image = event.target.files[0];
-    },
     async submitForm() {
-      const formData = new FormData();
-      formData.append('name', this.formData.name);
-      formData.append('desc', this.formData.desc);
-      formData.append('image', this.formData.image);
+      this.game.userId = this.user.id
 
-      try {
-        const response = await fetch('http://10.4.20.37:3000/games', {
-          method: 'POST',
-          body: formData,
-        });
-
-        if (response.ok) {
-          console.log('Jogo cadastrado com sucesso!');
-          // Você pode adicionar aqui um redirecionamento ou uma mensagem de sucesso
-        } else {
-          console.error('Erro ao cadastrar o jogo.');
-          console.log(response)
-        }
-      } catch (error) {
-        console.error('Erro ao comunicar com o servidor:', error);
+      if(this.$route.params.id) {
+        axios.put(`${baseApiUrl}/games/${this.$route.params.id}`, this.game)
+          .then(() => {
+              this.$toasted.global.defaultSuccess()
+              this.game = {}
+          })
+          .catch(showError)
+      } else {
+        axios.post(`${baseApiUrl}/games`, this.game)
+          .then(() => {
+              this.$toasted.global.defaultSuccess()
+              this.game = {}
+          })
+          .catch(showError)
       }
     },
+    // handleImageChange(event) {
+    //   this.formData.image = event.target.files[0];
+    // },
   },
+  mounted() {
+    if(this.$route.params.id) {
+      const url = `${baseApiUrl}/games/${this.$route.params.id}`
+      axios.get(url).then(res => this.game = res.data)
+    }       
+  }
 };
 </script>
