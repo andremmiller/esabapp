@@ -31,7 +31,7 @@ module.exports = app => {
 
     const get = (req, res) => {
         app.db('loans')
-            .select('id', 'gameId', 'endAt', 'userId')
+            .select('id', 'gameId', 'beginAt', 'endAt', 'userId', 'status')
             .then(loans => res.json(loans))
             .catch(err => res.status(500).send(err))
     }
