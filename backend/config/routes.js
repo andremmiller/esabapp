@@ -25,6 +25,9 @@ module.exports = app => {
         .get(app.api.game.getById)
         .delete(app.api.game.remove)
     
+    app.route('/owned/games').all(app.config.passport.authenticate()).get(app.api.game.getOwned)
+    app.route('/owned/loans').all(app.config.passport.authenticate()).get(app.api.loan.getOwned)
+    
     app.route('/games/:id/uploadImg')
         //.all(app.config.passport.authenticate())
         .post(app.api.game.uploadImg)

@@ -35,6 +35,10 @@ const routes = [{
     path: '/game/',
     component: GameList
 }, {
+    name: 'gameOwned',
+    path: '/game/owned',
+    component: GameList
+}, {
     name: 'game',
     path: '/game/:id',
     component: Game

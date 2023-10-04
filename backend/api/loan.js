@@ -52,6 +52,28 @@ module.exports = app => {
             })
     }
 
+    const getOwned = (req, res) => {
+        app.db('loans')
+            .select(
+                'loans.id', 
+                'loans.gameId', 
+                'loans.beginAt', 
+                'loans.endAt', 
+                'loans.userId', 
+                'loans.status',
+                'users.name as userName',
+                'games.name as gameName'
+            )
+            .join('users', 'loans.userId', 'users.id')
+            .join('games', 'loans.gameId', 'games.id')
+            .where({ 'loans.userId': req.user.id })
+            .then(loans => res.json(loans))
+            .catch(err => {
+                console.error(err)
+                res.status(500).send(err)
+            })
+    }
+
     const getById = (req, res) => {
         app.db('loans')
             .select('id', 'gameId', 'endAt', 'userId')
@@ -74,5 +96,5 @@ module.exports = app => {
         }
     }
 
-    return { save, get, getById, remove }
+    return { save, get, getById, remove, getOwned }
 }

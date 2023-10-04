@@ -8,7 +8,7 @@
             <i class="fa fa-angle-down"></i>
         </div>
         <div class="user-dropdown-content">
-            <router-link to="/game">
+            <router-link to="/game/owned">
               <i class="fa fa-gamepad"></i> Meus jogos 
             </router-link>
             <router-link to="/loans">

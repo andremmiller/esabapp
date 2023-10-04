@@ -37,7 +37,7 @@ export default {
     
   },
   mounted() {
-    const url = `${baseApiUrl}/games/`
+    const url = window.location.pathname.includes('owned') ? `${baseApiUrl}/owned/games` : `${baseApiUrl}/games/`
     axios.get(url).then(res => this.games = res.data)       
   }
 };

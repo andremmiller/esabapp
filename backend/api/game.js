@@ -37,6 +37,14 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
     }
 
+    const getOwned = (req, res) => {
+        app.db('games')
+            .select('id', 'name', 'desc', 'userId')
+            .where({ 'games.userId': req.user.id })
+            .then(games => res.json(games))
+            .catch(err => res.status(500).send(err))
+    }
+
     const getById = (req, res) => {
         app.db('games')
             .select(
@@ -76,5 +84,5 @@ module.exports = app => {
 
     }
 
-    return { save, get, getById, remove, uploadImg }
+    return { save, get, getById, getOwned, remove, uploadImg }
 }
