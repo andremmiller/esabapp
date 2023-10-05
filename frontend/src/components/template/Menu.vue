@@ -25,7 +25,7 @@
             <router-link :to="{ name: 'loanList' }">
                 <li class="menu-item">
                     <i class="fa fa-handshake-o" aria-hidden="true"></i>
-                    Empréstimos
+                    Meus Empréstimos
                 </li>
             </router-link>
         </ul>

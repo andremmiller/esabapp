@@ -26,7 +26,8 @@ module.exports = app => {
         .delete(app.api.game.remove)
     
     app.route('/owned/games').all(app.config.passport.authenticate()).get(app.api.game.getOwned)
-    app.route('/owned/loans').all(app.config.passport.authenticate()).get(app.api.loan.getOwned)
+    app.route('/loans/loanedToUser').all(app.config.passport.authenticate()).get(app.api.loan.getLoanedToUser)
+    app.route('/loans/loanedByUser').all(app.config.passport.authenticate()).get(app.api.loan.getLoanedByUser)
     
     app.route('/games/:id/uploadImg')
         //.all(app.config.passport.authenticate())
@@ -53,4 +54,8 @@ module.exports = app => {
         .put(app.api.fee.save)
         .get(app.api.fee.getById)
         .delete(app.api.fee.remove)
+    
+    app.route('/confirmPayment')
+        .all(app.config.passport.authenticate())
+        .put(app.api.fee.confirmPayment)
 }

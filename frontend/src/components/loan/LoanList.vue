@@ -1,6 +1,12 @@
 <template>
   <div>
     <h1>Lista de empréstimos</h1>
+    <h3>Emprestados por mim</h3>
+    <LoanByUser />
+
+    <h3>Emprestados para mim</h3>
+    <LoanToUser />
+    <!-- <h1>Lista de empréstimos</h1>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -20,14 +26,14 @@
                 <td>{{ loan.endAt }}</td>
                 <td>{{ loan.status }}</td>
                 <td>
-                    <button type="button" class="btn btn-success" v-if="loan.status == 'Solicitado'" @click="changeStatus(loan, 'Vigente')">Aceitar</button> <!-- Mudar para Vigente -->
-                    <button type="button" class="btn btn-danger" v-if="loan.status == 'Solicitado'" @click="changeStatus(loan, 'Finalizado')">Recusar</button> <!-- Mudar para Finalizado -->
-                    <button type="button" class="btn btn-info" v-if="loan.status == 'Vigente'" @click="changeStatus(loan, 'Finalizado')">Confirmar devolução</button> <!-- Mudar para Finalizado -->
-                    <button type="button" class="btn btn-warning" v-if="loan.status == 'Com pendência'" @click="changeStatus(loan, 'Finalizado')">Confirmar pagamento</button> <!-- Mudar para Finalizado -->
+                    <button type="button" class="btn btn-success" v-if="loan.status == 'Solicitado'" @click="changeStatus(loan, 'Vigente')">Aceitar</button> 
+                    <button type="button" class="btn btn-danger" v-if="loan.status == 'Solicitado'" @click="changeStatus(loan, 'Finalizado')">Recusar</button> 
+                    <button type="button" class="btn btn-info" v-if="loan.status == 'Vigente'" @click="changeStatus(loan, 'Finalizado')">Confirmar devolução</button> 
+                    <button type="button" class="btn btn-warning" v-if="loan.status == 'Com pendência'" @click="changeStatus(loan, 'Finalizado')">Confirmar pagamento</button> 
                 </td>
             </tr>
         </tbody>
-    </table>
+    </table> -->
   </div>
 </template>
 
@@ -35,31 +41,34 @@
 import { baseApiUrl, showError } from '@/global'
 import axios from 'axios'
 import { mapState } from 'vuex'
+import LoanByUser from './LoanByUser.vue'
+import LoanToUser from './LoanToUser.vue'
 
 export default {
   name: 'LoanList',
-  computed: mapState(['user']),
-  data() {
-    return {
-      loans: null
-    };
-  }, 
-  methods: {
-    async changeStatus(loan, newStatus) {
-        loan.status = newStatus
-        loan.beginAt = loan.beginAt.split('T')[0]
-        loan.endAt = loan.endAt.split('T')[0]
+  components: {LoanByUser, LoanToUser},
+  //computed: mapState(['user']),
+  // data() {
+  //   return {
+  //     loans: null
+  //   };
+  // }, 
+  // methods: {
+  //   async changeStatus(loan, newStatus) {
+  //       loan.status = newStatus
+  //       loan.beginAt = loan.beginAt.split('T')[0]
+  //       loan.endAt = loan.endAt.split('T')[0]
 
-        axios.put(`${baseApiUrl}/loans/${loan.id}`, loan)
-          .then(() => {
-              this.$toasted.global.defaultSuccess()
-          })
-          .catch(showError)
-    }
-  },
-  mounted() {
-    const url = `${baseApiUrl}/loans/`
-    axios.get(url).then(res => this.loans = res.data)       
-  }
+  //       axios.put(`${baseApiUrl}/loans/${loan.id}`, loan)
+  //         .then(() => {
+  //             this.$toasted.global.defaultSuccess()
+  //         })
+  //         .catch(showError)
+  //   }
+  // },
+  // mounted() {
+  //   const url = `${baseApiUrl}/loans/`
+  //   axios.get(url).then(res => this.loans = res.data)       
+  // }
 };
 </script>

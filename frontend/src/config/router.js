@@ -5,6 +5,7 @@ import Home from '@/components/home/Home'
 import AdminPages from '@/components/admin/AdminPages'
 import GameForm from '@/components/game/GameForm'
 import GameList from '@/components/game/GameList'
+import UserGames from '@/components/game/UserGames'
 import Game from '@/components/game/Game'
 import Auth from '@/components/auth/Auth'
 import LoanList from '@/components/loan/LoanList'
@@ -37,7 +38,7 @@ const routes = [{
 }, {
     name: 'gameOwned',
     path: '/game/owned',
-    component: GameList
+    component: UserGames
 }, {
     name: 'game',
     path: '/game/:id',

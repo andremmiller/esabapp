@@ -29,6 +29,22 @@ module.exports = app => {
         }
     }
 
+    const confirmPayment = (req, res) => {
+        const loan = { ...req.body }
+
+        app.db('fees')
+            .update({status: 'Pago'})
+            .where({ loanId: loan.id })
+            .then(_ => {
+                app.db('loans')
+                    .update({status: 'Finalizado'})
+                    .where({ id: loan.id })
+                    .then(_ => res.status(204).send())
+                    .catch(err => res.status(500).send(err))
+            })
+            .catch(err => res.status(500).send(err))     
+    }
+
     const get = (req, res) => {
         app.db('fees')
             .select('id', 'loanId', 'value', 'status')
@@ -58,5 +74,5 @@ module.exports = app => {
         }
     }
 
-    return { save, get, getById, remove }
+    return { save, get, getById, remove, confirmPayment }
 }
