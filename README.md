@@ -9,53 +9,42 @@ Projeto para disciplina de graduação
 ## Setup provisorio DEV
 Como o frontend ainda não está em imagem docker, deve-se configurar o arquivo global.js com a URL da API conforme o ambiente em que está sendo testado
 No package.json, ajustar npm run serve com export/set, para os SOs linux/windows, respectivamente
+Se for mexer no backend, rodar npm run dev na pasta /backend, em vez de subir container. Nesse caso, atentar-se para o host do banco de dados, pois nao estará mais acessível pelo hostname do docker.
 
 ## Possíveis erros
 01. Frontend
 Erro ao rodar npm run serve: opensslErrorStack: [ 'error:03000086:digital envelope routines::initialization error' ] 
-Solução: Rodar comando no linux ==> export NODE_OPTIONS=--openssl-legacy-provider
+Solução: Rodar comando no linux ==> export NODE_OPTIONS=--openssl-legacy-provider (alterado como parametro no package.json; export no linux, set no windows)
 
 ## Andamento
+Criar função para envio de email
+-> Disparar email quando
+1. Empréstimo solicitado
+2. Empréstimo aceito/recusado
+3. Devolução confirmada
+4. Multa gerada (dono e quem alugou)
+5. Pagamento confirmado
 
-** Frontend: componente Game criado com um formulario base
-** Frontend: cadastro de usuario e autenticacao criados
-** Backend: rota criada para upload de imagem de jogos
+Criar página para detalhe de um empréstimo
+-> Informações para exibir:
+1. Imagem e dados do jogo
+2. Datas
+3. Status
+4. Multas associadas
+5. Botões para o dono do jogo (os mesmos disponíveis na tabela)
 
-01. Frontend
--> Cadastros/edições
-** Novo usuário OK
-** Novo jogo OK
-** Novo empréstimo OK
-** Lista de empréstimos OK
+Criar restrição para jogos indisponíveis
+1. No backend, fazer validação para empréstimos com status vigente na data da indicada ao adicionar empréstimo
 
-**** Status de empréstimos: OK
-        Solicitado (Solicitar com prazo)
-        Vigente (Aceitar emprestimo)
-        Finalizado (Confirmar devolução)
-        Com pendência (via script, com atraso e geração de multa)
-        Finalizado (Confirmar pagamento de multa)
+Adicionar upload de imagem de jogo
+1. Criar função no backend para adicionar imagem
+2. Adicionar campo no formulário e ajustar envio
 
--> Tela inicial:
-Busca de todos os jogos na plataforma
-OK ** Barra de pesquisa
-OK ** Paginação
-
--> Menus possíveis (userdropdown)
-OK ** Meus jogos cadastrados
-** Pedidos de empréstimo (meus jogos)
-** Meus empréstimos
-** Minhas pendências (multas e devoluções)
-
--> Dentro de um jogo (detalhe)
-** Contato do dono
-** Disponível ou não
+## Ajustes finais
+1. Remover logo do title
+2. Remover informações no rodapé
+3. Personalizar tela de login
 
 
-OK
--> Dentro de empréstimo
-** Dados do jogo
-** Dados do empréstimo
-** Status do empréstimo
-** Botões de ações
 
 
