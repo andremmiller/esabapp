@@ -17,11 +17,17 @@ module.exports = app => {
         }
 
         if(game.id) {
+            delete game.userName
+            delete game.userMail
+            delete game.userPhone
             app.db('games')
                 .update(game)
                 .where({ id: game.id })
                 .then(_ => res.status(204).send())
-                .catch(err => res.status(500).send(err))
+                .catch(err => {
+                    console.error(err)
+                    res.status(500).send(err)
+                })
         } else {
             app.db('games')
                 .insert(game)

@@ -37,11 +37,11 @@ Solução: Rodar comando no linux ==> export NODE_OPTIONS=--openssl-legacy-provi
 
 -> Tela inicial:
 Busca de todos os jogos na plataforma
-** Barra de pesquisa
-** Paginação
+OK ** Barra de pesquisa
+OK ** Paginação
 
 -> Menus possíveis (userdropdown)
-** Meus jogos cadastrados
+OK ** Meus jogos cadastrados
 ** Pedidos de empréstimo (meus jogos)
 ** Meus empréstimos
 ** Minhas pendências (multas e devoluções)
