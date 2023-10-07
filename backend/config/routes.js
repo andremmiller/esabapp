@@ -34,12 +34,12 @@ module.exports = app => {
         .post(app.api.game.uploadImg)
     
     app.route('/loans')
-        //.all(app.config.passport.authenticate())
+        .all(app.config.passport.authenticate())
         .post(app.api.loan.save) // consign se encarrega de carregar os imports para dentro de app
         .get(app.api.loan.get)
 
     app.route('/loans/:id')
-        //.all(app.config.passport.authenticate())
+        .all(app.config.passport.authenticate())
         .put(app.api.loan.save)
         .get(app.api.loan.getById)
         .delete(app.api.loan.remove)

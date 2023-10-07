@@ -18,12 +18,13 @@ Solução: Rodar comando no linux ==> export NODE_OPTIONS=--openssl-legacy-provi
 
 ## Andamento
 Criar função para envio de email
+** Adicionado container de mailserver para subir junto ao database
 -> Disparar email quando
-1. Empréstimo solicitado
-2. Empréstimo aceito/recusado
-3. Devolução confirmada
-4. Multa gerada (dono e quem alugou)
-5. Pagamento confirmado
+1. OK Empréstimo solicitado
+2. OK Empréstimo aceito/recusado
+3. OK Devolução confirmada
+4. OK Multa gerada
+5. OK Pagamento confirmado
 
 Criar página para detalhe de um empréstimo
 -> Informações para exibir:

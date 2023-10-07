@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt-nodejs')
+const mail = require('../config/mail')
 
 module.exports = app => {
     const { existsOrError, notExistsOrError, equalsOrError } = app.api.validation
@@ -39,7 +40,11 @@ module.exports = app => {
                 app.db('loans')
                     .update({status: 'Finalizado'})
                     .where({ id: loan.id })
-                    .then(_ => res.status(204).send())
+                    .then(async _ => {
+                        const loanUser = await app.api.user.getByUserId(loan.userId)
+                        await mail.send('Multa - pagamento confirmado', `Seu emprestimo pendente foi finalizado pelo proprietario`, loanUser.email);
+                        res.status(204).send()
+                    })
                     .catch(err => res.status(500).send(err))
             })
             .catch(err => res.status(500).send(err))     

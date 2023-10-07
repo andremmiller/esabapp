@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt-nodejs')
+const mail = require('../config/mail')
 
 module.exports = app => {
     const { existsOrError, notExistsOrError, equalsOrError } = app.api.validation
@@ -18,15 +19,27 @@ module.exports = app => {
         if(loan.id) {
             delete loan.gameName
             delete loan.userName
+            
             app.db('loans')
                 .update(loan)
                 .where({ id: loan.id })
-                .then(_ => res.status(204).send())
-                .catch(err => res.status(500).send(err))
+                .then(async _ => {
+                    const loanUser = await app.api.user.getByUserId(loan.userId)
+                    await mail.send('Emprestimo - mudança de status', `Sua solicitacao de emprestimo encontra-se ${loan.status}`, loanUser.email);
+                    res.status(204).send()
+                })
+                .catch(err => {
+                    console.error(err)
+                    res.status(500).send(err)
+                })
         } else {
             app.db('loans')
                 .insert(loan)
-                .then(_ => res.status(204).send())
+                .then(async _ => {
+                    const gameUser = await app.api.user.getUserByGameId(loan.gameId)
+                    await mail.send('Emprestimo solicitado', 'Foi solicitado um emprestimo para seu jogo.', gameUser.email);
+                    res.status(204).send()
+                })
                 .catch(err => res.status(500).send(err))
         }
     }

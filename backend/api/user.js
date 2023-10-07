@@ -60,7 +60,7 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
     }
 
-    const getById = (req, res) => {
+    const getById = async (req, res) => {
         app.db('users')
             .select('id', 'name', 'email', 'phone')
             .where({ id: req.params.id })
@@ -87,5 +87,24 @@ module.exports = app => {
         }
     }
 
-    return { save, get, getById, remove }
+    const getUserByGameId = async (gameId) => {
+        return app.db('games')
+            .where({ id: gameId })
+            .select('userId')
+            .then(async (rows) => {
+                const userId = rows[0].userId;
+                // Now, fetch the user's email using the userId
+                return getByUserId(userId)
+            });
+    }
+
+    const getByUserId = async (userId) => {
+        return app.db('users')
+            .select('id', 'name', 'email', 'phone')
+            .where({ id: userId })
+            .first()
+            .then(user => user)
+    }
+
+    return { save, get, getById, remove, getUserByGameId, getByUserId }
 }

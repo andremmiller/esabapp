@@ -23,6 +23,13 @@ services:
       - PMA_ARBITRARY=1
     networks:
       - app
+  mailserver:
+    image: rnwood/smtp4dev:v3
+    ports:
+      - "3001:80"
+      - "2525:25"
+    networks:
+      - app 
 networks:
   app:
     driver: bridge

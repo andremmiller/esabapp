@@ -1,5 +1,6 @@
 const mysql = require('mysql2');
 const config = require('./knexfile');
+const mail = require('./config/mail')
 
 // Create a MySQL connection
 const connection = mysql.createConnection(config.connection);
@@ -58,16 +59,39 @@ connection.connect((err) => {
             
             // Update the 'status' column in the 'loans' table for the loan with 'Com pendência'
             const updateStatusQuery = `UPDATE loans SET status = 'Com pendência' WHERE id = ?`;
-            connection.query(updateStatusQuery, [loan.id], (err) => {
+            connection.query(updateStatusQuery, [loan.id], async (err) => {
               if (err) {
                 console.error('Error updating loan status:', err);
               } else {
                 console.log(`Updated status for loan ID ${loan.id} to 'Com pendência'`);
+                
+                // Fetch user's email address based on 'userId'
+                const userEmail = await getUserEmail(loan.userId);
+                // Send email notification
+                const subject = 'Multa gerada por atraso';
+                const content = 'Multa foi gerada para o seu emprestimo. Entre em contato com o proprietario e faca as devidas quitacoes';
+                mail.send(subject, content, userEmail);
               }
               // Move on to the next loan
               insertFeesAndUpdateStatus(index + 1);
             });
           }
+        });
+      }
+
+      // Function to retrieve user's email based on userId
+      async function getUserEmail(userId) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT email FROM users WHERE id = ?';
+            connection.query(query, [userId], (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else if (rows.length === 0) {
+                    reject('User not found');
+                } else {
+                    resolve(rows[0].email);
+                }
+            });
         });
       }
   
