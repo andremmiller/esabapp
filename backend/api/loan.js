@@ -19,7 +19,7 @@ module.exports = app => {
         if(loan.id) {
             delete loan.gameName
             delete loan.userName
-            
+            delete loan.gameUserId
             app.db('loans')
                 .update(loan)
                 .where({ id: loan.id })
@@ -54,7 +54,8 @@ module.exports = app => {
                 'loans.userId', 
                 'loans.status',
                 'users.name as userName',
-                'games.name as gameName'
+                'games.name as gameName',
+                'games.userId as gameUserId'
             )
             .join('users', 'loans.userId', 'users.id')
             .join('games', 'loans.gameId', 'games.id')
@@ -75,7 +76,8 @@ module.exports = app => {
                 'loans.userId', 
                 'loans.status',
                 'users.name as userName',
-                'games.name as gameName'
+                'games.name as gameName',
+                'games.userId as gameUserId'
             )
             .join('users', 'loans.userId', 'users.id')
             .join('games', 'loans.gameId', 'games.id')
@@ -97,7 +99,8 @@ module.exports = app => {
                 'loans.userId', 
                 'loans.status',
                 'users.name as userName',
-                'games.name as gameName'
+                'games.name as gameName',
+                'games.userId as gameUserId'
             )
             .join('users', 'loans.userId', 'users.id')
             .join('games', 'loans.gameId', 'games.id')
@@ -111,11 +114,26 @@ module.exports = app => {
 
     const getById = (req, res) => {
         app.db('loans')
-            .select('id', 'gameId', 'endAt', 'userId')
-            .where({ id: req.params.id })
+            .select(
+                'loans.id', 
+                'loans.gameId', 
+                'loans.beginAt', 
+                'loans.endAt', 
+                'loans.userId', 
+                'loans.status',
+                'users.name as userName',
+                'games.name as gameName',
+                'games.userId as gameUserId'
+            )
+            .join('users', 'loans.userId', 'users.id')
+            .join('games', 'loans.gameId', 'games.id')
+            .where({ 'loans.id': req.params.id })
             .first()
             .then(loan => res.json(loan))
-            .catch(err => res.status(500).send(err))
+            .catch(err => {
+                console.error(err)
+                res.status(500).send(err)
+            })
     }
 
     const remove = async (req, res) => {

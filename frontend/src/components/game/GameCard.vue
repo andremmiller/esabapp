@@ -19,3 +19,8 @@ export default {
   props: ['game']
 };
 </script>
+<style scoped>
+  .card {
+    margin-top: 15px;
+  }
+</style>

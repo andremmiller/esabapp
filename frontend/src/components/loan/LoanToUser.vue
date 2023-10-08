@@ -19,10 +19,7 @@
                 <td>{{ loan.endAt }}</td>
                 <td>{{ loan.status }}</td>
                 <td>
-                    <!-- <button type="button" class="btn btn-success" v-if="loan.status == 'Solicitado'" @click="changeStatus(loan, 'Vigente')">Aceitar</button>
-                    <button type="button" class="btn btn-danger" v-if="loan.status == 'Solicitado'" @click="changeStatus(loan, 'Finalizado')">Recusar</button> 
-                    <button type="button" class="btn btn-info" v-if="loan.status == 'Vigente'" @click="changeStatus(loan, 'Finalizado')">Confirmar devolução</button> 
-                    <button type="button" class="btn btn-warning" v-if="loan.status == 'Com pendência'" @click="changeStatus(loan, 'Finalizado')">Confirmar pagamento</button> -->
+                  <LoanActions :loan="loan" :displayLink="true" />
                 </td>
             </tr>
         </tbody>
@@ -34,27 +31,18 @@
 import { baseApiUrl, showError } from '@/global'
 import axios from 'axios'
 import { mapState } from 'vuex'
+import LoanActions from './LoanActions.vue'
 
 export default {
   name: 'LoanList',
   computed: mapState(['user']),
+  components: {LoanActions},
   data() {
     return {
       loans: null
     };
   }, 
   methods: {
-    async changeStatus(loan, newStatus) {
-        loan.status = newStatus
-        loan.beginAt = loan.beginAt.split('T')[0]
-        loan.endAt = loan.endAt.split('T')[0]
-
-        axios.put(`${baseApiUrl}/loans/${loan.id}`, loan)
-          .then(() => {
-              this.$toasted.global.defaultSuccess()
-          })
-          .catch(showError)
-    }
   },
   mounted() {
     const url = `${baseApiUrl}/loans/loanedToUser`

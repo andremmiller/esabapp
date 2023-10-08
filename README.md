@@ -28,11 +28,11 @@ Criar função para envio de email
 
 Criar página para detalhe de um empréstimo
 -> Informações para exibir:
-1. Imagem e dados do jogo
-2. Datas
-3. Status
-4. Multas associadas
-5. Botões para o dono do jogo (os mesmos disponíveis na tabela)
+1. OK Imagem e dados do jogo
+2. OK Datas
+3. OK Status
+4. OK Multas associadas
+5. OK Botões para o dono do jogo (os mesmos disponíveis na tabela)
 
 Criar restrição para jogos indisponíveis
 1. No backend, fazer validação para empréstimos com status vigente na data da indicada ao adicionar empréstimo

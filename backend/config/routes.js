@@ -48,6 +48,10 @@ module.exports = app => {
         //.all(app.config.passport.authenticate())
         .post(app.api.fee.save) // consign se encarrega de carregar os imports para dentro de app
         .get(app.api.fee.get)
+    
+    app.route('/feesByLoan/:loanId')
+        //.all(app.config.passport.authenticate())
+        .get(app.api.fee.getByLoanId)
 
     app.route('/fees/:id')
         //.all(app.config.passport.authenticate())

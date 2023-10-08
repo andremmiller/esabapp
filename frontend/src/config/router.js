@@ -9,6 +9,7 @@ import UserGames from '@/components/game/UserGames'
 import Game from '@/components/game/Game'
 import Auth from '@/components/auth/Auth'
 import LoanList from '@/components/loan/LoanList'
+import Loan from '@/components/loan/Loan'
 
 // import { userKey } from '@/global'
 
@@ -47,6 +48,10 @@ const routes = [{
     name: 'loanList',
     path: '/loans/',
     component: LoanList
+}, {
+    name: 'loan',
+    path: '/loans/:id',
+    component: Loan
 }
 // , {
 //     name: 'articlesByCategory',

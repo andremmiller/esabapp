@@ -66,6 +66,14 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
     }
 
+    const getByLoanId = (req, res) => {
+        app.db('fees')
+            .select('id', 'loanId', 'value', 'status')
+            .where({ loanId: req.params.loanId })
+            .then(fees => res.json(fees))
+            .catch(err => res.status(500).send(err))
+    }
+
     const remove = async (req, res) => {
         try {
             const rowsDeleted = await app.db('fees')
@@ -79,5 +87,5 @@ module.exports = app => {
         }
     }
 
-    return { save, get, getById, remove, confirmPayment }
+    return { save, get, getById, remove, confirmPayment, getByLoanId }
 }
