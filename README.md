@@ -45,7 +45,7 @@ Adicionar upload de imagem de jogo
 1. Remover logo do title
 2. Remover informações no rodapé
 3. Personalizar tela de login
-
+4. Ajustar display das datas
 
 
 
