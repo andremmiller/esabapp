@@ -1,7 +1,6 @@
 <template>
     <div class="auth-content">
         <div class="auth-modal">
-            <img src="@/assets/logo.png" width="200" alt="Logo" />
             <hr>
             <div class="auth-title">{{ showSignup ? 'Cadastro' : 'Login' }}</div>
 
@@ -41,7 +40,7 @@ export default {
                 .then(res => {
                     this.$store.commit('setUser', res.data)
                     localStorage.setItem(userKey, JSON.stringify(res.data))
-                    this.$router.push({ path: '/' })
+                    this.$router.push({ path: '/game' })
                 })
                 .catch(showError)
         },

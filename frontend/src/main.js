@@ -7,6 +7,7 @@ import './config/bootstrap'
 import './config/msgs'
 import './config/axios'
 import './config/mq'
+import './config/date-format'
 import store from './config/store'
 import router from './config/router'
 

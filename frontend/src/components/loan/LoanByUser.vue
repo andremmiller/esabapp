@@ -15,8 +15,8 @@
             <tr v-for="loan in loans" :key="loan.id">
                 <td>{{ loan.gameName }}</td>
                 <td>{{ loan.userName }}</td>
-                <td>{{ loan.beginAt }}</td>
-                <td>{{ loan.endAt }}</td>
+                <td>{{ loan.beginAt | displayDate }}</td>
+                <td>{{ loan.endAt | displayDate }}</td>
                 <td>{{ loan.status }}</td>
                 <td>
                     <LoanActions :loan="loan" :displayLink="true"/>
@@ -32,6 +32,7 @@ import { baseApiUrl, showError } from '@/global'
 import axios from 'axios'
 import { mapState } from 'vuex'
 import LoanActions from './LoanActions.vue'
+import moment from 'moment'
 
 export default {
   name: 'LoanList',

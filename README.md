@@ -38,14 +38,16 @@ Criar restrição para jogos indisponíveis
 1. OK No backend, fazer validação para empréstimos com status vigente na data da indicada ao adicionar empréstimo
 
 Adicionar upload de imagem de jogo
-1. Criar função no backend para adicionar imagem
-2. Adicionar campo no formulário e ajustar envio
+1. OK Criar função no backend para adicionar imagem
+2. OK Adicionar campo no formulário e ajustar envio
 
 ## Ajustes finais
-1. Remover logo do title
-2. Remover informações no rodapé
-3. Personalizar tela de login
-4. Ajustar display das datas
+1. OK Remover logo do title
+2. OK Remover informações no rodapé
+3. OK Personalizar tela de login
+4. OK Ajustar display das datas
+5. Ajustes nos botões lista de "Meus jogos"
+6. Ajuste na tela de upload de imagem
 
 
 

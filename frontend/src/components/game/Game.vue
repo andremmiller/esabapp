@@ -3,7 +3,7 @@
     <h1>Detalhe do jogo</h1>
         <b-card
             :title="game ? game.name : null"
-            img-src="https://picsum.photos/600/300/?image=25"
+            :img-src="getImagePath()"
             img-top
             tag="article"
             style="max-width: 50rem;"
@@ -41,6 +41,9 @@ export default {
     };
   }, 
   methods: {
+    getImagePath() {
+      return this.game ? `${baseApiUrl}/uploads/${this.game.image}` : ''
+    }
   },
   mounted() {
     if(this.$route.params.id) {

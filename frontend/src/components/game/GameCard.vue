@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card" style="max-width: 20rem;">
-        <img class="card-img-top" src="https://picsum.photos/600/300/?image=25">
+        <img class="card-img-top" :src="getImagePath()">
         <div class="card-body">
             <h5 class="card-title">{{ game.name }}</h5>
             <p class="card-text">{{ game.desc }}</p>
@@ -14,9 +14,16 @@
 </template>
 
 <script>
+import { baseApiUrl } from '@/global'
+
 export default {
   name: 'GameCard',
-  props: ['game']
+  props: ['game'],
+  methods: {
+    getImagePath() {
+      return `${baseApiUrl}/uploads/${this.game.image}`
+    }
+  }
 };
 </script>
 <style scoped>

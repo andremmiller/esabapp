@@ -10,21 +10,13 @@ import Game from '@/components/game/Game'
 import Auth from '@/components/auth/Auth'
 import LoanList from '@/components/loan/LoanList'
 import Loan from '@/components/loan/Loan'
+import UploadImg from '@/components/game/UploadImg'
 
 // import { userKey } from '@/global'
 
 Vue.use(VueRouter)
 
 const routes = [{
-    name: 'home',
-    path: '/',
-    component: Home
-}, {
-    name: 'adminPages',
-    path: '/admin',
-    component: AdminPages,
-    meta: { requiresAdmin: true }
-}, {
     name: 'gameAdd',
     path: '/game/add',
     component: GameForm
@@ -52,6 +44,10 @@ const routes = [{
     name: 'loan',
     path: '/loans/:id',
     component: Loan
+}, {
+    name: 'gameUploadImg',
+    path: '/gameUploadImg/:id/',
+    component: UploadImg
 }
 // , {
 //     name: 'articlesByCategory',

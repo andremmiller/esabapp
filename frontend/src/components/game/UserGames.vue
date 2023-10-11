@@ -22,6 +22,9 @@
                     <router-link :to="{ name: 'gameUpdate', params: { id: game.id } }">
                         <button type="button" class="btn btn-primary">Editar</button>
                     </router-link>
+                    <router-link :to="{ name: 'gameUploadImg', params: { id: game.id } }">
+                        <button type="button" class="btn btn-success">Alterar imagem</button>
+                    </router-link>
                     <button type="button" class="btn btn-danger">Excluir</button> 
                 </td>
             </tr>

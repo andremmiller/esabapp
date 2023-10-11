@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt-nodejs')
+const multer = require('multer');
 
 module.exports = app => {
     const { existsOrError, notExistsOrError, equalsOrError } = app.api.validation
@@ -20,6 +21,7 @@ module.exports = app => {
             delete game.userName
             delete game.userMail
             delete game.userPhone
+            
             app.db('games')
                 .update(game)
                 .where({ id: game.id })
@@ -38,7 +40,7 @@ module.exports = app => {
 
     const get = (req, res) => {
         app.db('games')
-            .select('id', 'name', 'desc', 'userId')
+            .select('id', 'name', 'desc', 'userId', 'image')
             .then(games => res.json(games))
             .catch(err => res.status(500).send(err))
     }
@@ -58,6 +60,7 @@ module.exports = app => {
                 'games.name', 
                 'games.desc', 
                 'games.userId',
+                'games.image',
                 'users.name as userName',
                 'users.email as userMail',
                 'users.phone as userPhone'
@@ -86,8 +89,23 @@ module.exports = app => {
     }
 
     const uploadImg = async (req, res) => {
-        return res.status(400).send("uploadImggggg")
+        if (!req.file) {
+            return res.status(400).json({ error: 'No file uploaded.' });
+        }
 
+        try {    
+            await app.db('games')
+                .update({ image: req.file.filename })
+                .where({ id: req.params.id })
+                .then(_ => res.json(req.file.filename))
+        } catch (err) {
+            res.status(400).send(err);
+        }
+
+        if (!req.file) {
+            console.log(req)
+            return res.status(400).json({ error: 'No file uploaded' });
+        }
     }
 
     return { save, get, getById, getOwned, remove, uploadImg }
