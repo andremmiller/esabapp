@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt-nodejs')
 const mail = require('../config/mail')
+const moment = require('moment')
 
 module.exports = app => {
-    const { existsOrError, notExistsOrError, equalsOrError } = app.api.validation
+    const { existsOrError, notExistsOrError, equalsOrError, validateDateRange } = app.api.validation
 
     // mesmo metodo para novo usuario e update (com parametro id definido)
     const save = async (req, res) => {
@@ -12,7 +13,10 @@ module.exports = app => {
         try {
             existsOrError(loan.gameId, 'Jogo não informado')
             existsOrError(loan.endAt, 'Data de término não informada')
+            validateDateRange(loan.beginAt, loan.endAt, 'Datas inválidas. Data de término não pode ser inferior a de início.')
+            await validateNoOverlappingLoans(loan.gameId, loan.beginAt, loan.endAt, 'Jogo já possui empréstimo vigente no período')
         } catch(msg) {
+            console.error(msg)
             return res.status(400).send(msg)
         }
 
@@ -146,6 +150,21 @@ module.exports = app => {
             res.status(204).send()
         } catch(msg) {
             res.status(400).send(msg)
+        }
+    }
+
+    async function validateNoOverlappingLoans(gameId, beginAt, endAt, msg) {
+        const now = moment(); // Get the current date and time using moment.js
+      
+        // Using raw SQL query
+        const sqlQuery = `SELECT * FROM loans WHERE gameId = ? AND status = 'Vigente' AND ((beginAt < ? AND endAt > ?) OR (beginAt < ? AND endAt > ?)) LIMIT 1`;
+
+        const bindings = [gameId, endAt, beginAt, endAt, beginAt];
+
+        const [overlappingLoan] = await app.db.raw(sqlQuery, bindings);
+
+        if (overlappingLoan.length > 0) {
+            throw msg; // There is an overlapping loan with status 'Vigente'
         }
     }
 

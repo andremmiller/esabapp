@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 module.exports = app => {
     function existsOrError(value, msg) {
         if(!value) throw msg // valor vazio
@@ -18,5 +20,24 @@ module.exports = app => {
         if(valueA !== valueB) throw msg
     }
 
-    return { existsOrError, notExistsOrError, equalsOrError }
+    function validateDateRange(beginAt, endAt, msg) {
+        const now = moment(); // Get the current date and time using moment.js
+      
+        const beginAtMoment = moment(beginAt);
+        const endAtMoment = moment(endAt);
+      
+        if (!beginAtMoment.isValid() || !endAtMoment.isValid()) {
+          throw msg; // Invalid date format
+        }
+      
+        if (beginAtMoment.isSameOrBefore(now) || endAtMoment.isSameOrBefore(now)) {
+          throw msg; // Either date is in the past
+        }
+      
+        if (beginAtMoment.isSameOrAfter(endAtMoment)) {
+          throw msg; // beginAt is not before endAt
+        }
+      }
+
+    return { existsOrError, notExistsOrError, equalsOrError, validateDateRange }
 }

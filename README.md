@@ -35,7 +35,7 @@ Criar página para detalhe de um empréstimo
 5. OK Botões para o dono do jogo (os mesmos disponíveis na tabela)
 
 Criar restrição para jogos indisponíveis
-1. No backend, fazer validação para empréstimos com status vigente na data da indicada ao adicionar empréstimo
+1. OK No backend, fazer validação para empréstimos com status vigente na data da indicada ao adicionar empréstimo
 
 Adicionar upload de imagem de jogo
 1. Criar função no backend para adicionar imagem
