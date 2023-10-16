@@ -6,9 +6,9 @@
 module.exports = {
   client: 'mysql2',
   connection: {
-    host: '10.4.20.37', //mp
+    //host: '10.4.20.37', //mp
     //host: 'localhost', //casa
-    //host: 'mysql', // docker
+    host: 'mysql', // docker
     port: 3306,
     database: 'esabapp',
     user:     'root',
