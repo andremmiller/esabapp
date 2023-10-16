@@ -10,7 +10,7 @@
     </aside>-->
     <aside class="menu" v-show="isMenuVisible">
         <ul>
-            <router-link :to="{ name: 'home' }">
+            <router-link :to="{ name: 'gameList' }">
                 <li class="menu-item">
                     <i class="fa fa-home" aria-hidden="true"></i> 
                     Início

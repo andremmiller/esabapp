@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  esabapp_frontend:
+    image: andremmiller/esabapp_frontend:1.0
+    ports:
+      - "8080:80"
+    # environment:
+    #   - VUE_APP_BASE_API_HOST=10.4.20.37
+#     networks:
+#       #- backend_app
+#       - app
+# networks:
+#   backend_app:
+#     external: true
+#   app:
+#     driver: bridge

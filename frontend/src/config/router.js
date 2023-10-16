@@ -16,7 +16,11 @@ import UploadImg from '@/components/game/UploadImg'
 
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [, {
+    name: 'gameHome',
+    path: '/',
+    component: GameForm
+}, {
     name: 'gameAdd',
     path: '/game/add',
     component: GameForm

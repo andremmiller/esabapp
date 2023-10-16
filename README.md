@@ -46,8 +46,16 @@ Adicionar upload de imagem de jogo
 2. OK Remover informações no rodapé
 3. OK Personalizar tela de login
 4. OK Ajustar display das datas
-5. Ajustes nos botões lista de "Meus jogos"
-6. Ajuste na tela de upload de imagem
+5. OK Ajustes nos botões lista de "Meus jogos"
+6. OK Ajuste na tela de upload de imagem
+7. OK Ajustes na tela de jogo para exibir emprestimo apenas de jogos de outras pessoas
+8. OK Ajustes no link para home
 
-
+## Docker - configuração final
+1. OK Ajustada imagem para o backend
+2. OK Adicionado mapeamento de volume para os uploads no backend (docker-compose)
+2. OK Criado dockerfile para o frontend usando nginx
+3. FRONTEND (atenção)
+---> criado o build para produção (npm run build e gerada a pasta /dist)
+---> a URL da API (global.js) deve ser checada antes de gerar o build (localhost na maioria dos casos)
 

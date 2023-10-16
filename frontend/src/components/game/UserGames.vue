@@ -54,5 +54,7 @@ export default {
 };
 </script>
 <style scoped>
-
+.btn {
+  margin-left: 10px
+}
 </style>

@@ -1,9 +1,13 @@
 version: '3.8'
+volumes:
+  uploads:
 services:
   esabapp_backend:
-    image: andremmiller/esabapp_backend:1.0
+    image: andremmiller/esabapp_backend:2.0
     ports:
       - "3000:3000"
+    volumes:
+      - uploads:/usr/src/app/uploads
     networks:
       - database_app
       - app

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="user.id !== (game && game.userId)">
     <b-form @submit.prevent="submitForm">
         <div class="form-group">
             <label>Data de início: </label>
