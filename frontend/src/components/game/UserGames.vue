@@ -25,7 +25,7 @@
                     <router-link :to="{ name: 'gameUploadImg', params: { id: game.id } }">
                         <button type="button" class="btn btn-success">Alterar imagem</button>
                     </router-link>
-                    <button type="button" class="btn btn-danger">Excluir</button> 
+                    <button type="button" class="btn btn-danger" @click="deleteGame(game.id)">Excluir</button> 
                 </td>
             </tr>
         </tbody>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { baseApiUrl } from '@/global'
+import { baseApiUrl, showError } from '@/global'
 import axios from 'axios'
 
 export default {
@@ -45,7 +45,14 @@ export default {
     };
   },
   methods: {
-    
+    deleteGame(gameId) {
+      const url = `${baseApiUrl}/games/${gameId}`
+      axios.delete(url).then(_ => {
+        this.$toasted.global.defaultSuccess()
+        const url = `${baseApiUrl}/owned/games`
+        axios.get(url).then(res => this.games = res.data)
+      }).catch(err => console.log(err))
+    }
   },
   mounted() {
     const url = `${baseApiUrl}/owned/games`

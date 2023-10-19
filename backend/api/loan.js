@@ -13,8 +13,6 @@ module.exports = app => {
         try {
             existsOrError(loan.gameId, 'Jogo não informado')
             existsOrError(loan.endAt, 'Data de término não informada')
-            validateDateRange(loan.beginAt, loan.endAt, 'Datas inválidas. Data de término não pode ser inferior a de início.')
-            await validateNoOverlappingLoans(loan.gameId, loan.beginAt, loan.endAt, 'Jogo já possui empréstimo vigente no período')
         } catch(msg) {
             console.error(msg)
             return res.status(400).send(msg)
@@ -37,6 +35,13 @@ module.exports = app => {
                     res.status(500).send(err)
                 })
         } else {
+            try {
+                validateDateRange(loan.beginAt, loan.endAt, 'Datas inválidas. Data de término não pode ser inferior a de início.')
+                await validateNoOverlappingLoans(loan.gameId, loan.beginAt, loan.endAt, 'Jogo já possui empréstimo vigente no período')
+            } catch(msg) {
+                console.error(msg)
+                return res.status(400).send(msg)
+            }
             app.db('loans')
                 .insert(loan)
                 .then(async _ => {

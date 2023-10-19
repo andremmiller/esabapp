@@ -30,10 +30,6 @@ module.exports = app => {
           throw msg; // Invalid date format
         }
       
-        if (beginAtMoment.isSameOrBefore(now) || endAtMoment.isSameOrBefore(now)) {
-          throw msg; // Either date is in the past
-        }
-      
         if (beginAtMoment.isSameOrAfter(endAtMoment)) {
           throw msg; // beginAt is not before endAt
         }

@@ -4,7 +4,7 @@ export const userKey = '__knowledge_user'
 //export const baseApiUrl = 'http://' + process.env.VUE_APP_BASE_API_HOST + ':3000' // nao vai funcionar; variavel de ambiente é setada no servidor
 //export const baseApiUrl = 'http://localhost:3000' //casa
 //export const baseApiUrl = 'http://esabapp_backend:3000' //docker nao vai funcionar, requisicao sai do browser de quem esta acessando. Deve ser um endereço acessível (localhost??)
-export const baseApiUrl = 'http://10.4.20.37:3000'
+export const baseApiUrl = 'http://localhost:3000'
 
 export function showError(e) {
     if(e && e.response && e.response.data) {

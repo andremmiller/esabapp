@@ -2,8 +2,10 @@ const nodemailer = require('nodemailer');
 
 // Create a transporter object for the open SMTP server
 const transporter = nodemailer.createTransport({
-    host: 'localhost',
-    port: 2525, // Typically, SMTP servers use port 587 for TLS/STARTTLS
+    host: 'mailserver',
+    port: 25, 
+  // host: 'localhost',
+   // port: 2525, // Typically, SMTP servers use port 587 for TLS/STARTTLS
     secure: false, // Set to true for SSL
     ignoreTLS: true, // Ignore TLS/STARTTLS (not recommended)
 });
